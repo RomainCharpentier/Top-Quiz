@@ -2,7 +2,6 @@ package com.romaincharpentier.topquiz
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
@@ -12,18 +11,17 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.isInvisible
 import com.romaincharpentier.topquiz.model.User
 import java.lang.Exception
 import kotlin.math.roundToInt
 
 
 class ListAdapter(context: Context, items: List<User>) :
-    ArrayAdapter<User>(context, R.layout.itemlistrow, items) {
+    ArrayAdapter<User>(context, R.layout.itemlist_rank, items) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val rowView: View = inflater.inflate(R.layout.itemlistrow, parent, false)
+        val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val rowView: View = inflater.inflate(R.layout.itemlist_rank, parent, false)
         val user: User? = getItem(position)
 
         val idView: TextView = rowView.findViewById(R.id.id)
@@ -32,7 +30,7 @@ class ListAdapter(context: Context, items: List<User>) :
         val scoreView: TextView = rowView.findViewById(R.id.score)
 
         nameView.text = user!!.firstname
-        scoreView.text = user!!.score.toString()
+        scoreView.text = user.score.toString()
 
         if (position in 0..2) {
             when (position) {
@@ -49,18 +47,18 @@ class ListAdapter(context: Context, items: List<User>) :
 //                    idView.setTextColor(Color.rgb(205,127,50))
                 }
             }
-            // On retire le classement, il est symbolisé par les trophés
+            // Remove ranking, it is symbolized by trophies
             (idView.parent as ViewGroup).removeView(idView)
         } else {
-            idView.text = Integer(position + 1).toString()
-            // On retire l'image, il n'y en a pas besoin car pas assez bien classé
+            idView.text = Integer.valueOf(position + 1).toString()
+            // We remove the image, there is no need because the rank is too low
             (imageView.parent as ViewGroup).removeView(imageView)
         }
         return rowView
     }
 
     private fun scaleImage(view: ImageView) { // Get bitmap from the the ImageView.
-        var bitmap: Bitmap? = null
+        val bitmap: Bitmap?
         bitmap = try {
             val drawing = view.drawable
             (drawing as BitmapDrawable).bitmap
@@ -68,7 +66,7 @@ class ListAdapter(context: Context, items: List<User>) :
             return
         }
         // Get current dimensions AND the desired bounding box
-        var width = 0
+        var width: Int
         width = try {
             bitmap!!.width
         } catch (e: NullPointerException) {

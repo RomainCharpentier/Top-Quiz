@@ -5,12 +5,10 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.io.IOException
 import kotlinx.io.InputStream
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.json.Json
@@ -55,7 +53,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
             mNumberOfQuestions = min(QUESTIONS_NUMBER, mQuestionBank.mQuestionList.size)
         }
 
-        mEnableTouchEvents = true;
+        mEnableTouchEvents = true
 
         answer1_btn.tag = 0
         answer2_btn.tag = 1
@@ -117,11 +115,11 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun displayQuestion(question: Question) {
-        question_text.text = question.question
-        answer1_btn.text = question.choiceList!![0]
-        answer2_btn.text = question.choiceList!![1]
-        answer3_btn.text = question.choiceList!![2]
-        answer4_btn.text = question.choiceList!![3]
+        question_txt.text = question.question
+        answer1_btn.text = question.choiceList[0]
+        answer2_btn.text = question.choiceList[1]
+        answer3_btn.text = question.choiceList[2]
+        answer4_btn.text = question.choiceList[3]
     }
 
     private fun generateQuestions(): QuestionBank {
@@ -129,7 +127,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         val jsonFile = inputStream.bufferedReader().use{it.readText()}
 
         val json = Json(JsonConfiguration.Stable)
-        val questionList = json.parse(Question.serializer().list, jsonFile!!)
+        val questionList = json.parse(Question.serializer().list, jsonFile)
 
         return QuestionBank(questionList)
     }

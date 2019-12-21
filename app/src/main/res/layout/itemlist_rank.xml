@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="fill_parent">
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="50dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:contentDescription="trophy_img"/>
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:text="00"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center"
+        android:text="name" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center"
+        android:text="score" />
+
+</TableLayout>

@@ -5,8 +5,6 @@ import java.util.Collections
 class QuestionBank(val mQuestionList: List<Question>) {
     private var mNextQuestionIndex: Int = 0
 
-    // Ensure we loop over the questions
-    // Please note the post-incrementation
     val question: Question
         get() {
             if (mNextQuestionIndex == mQuestionList.size) {
@@ -17,7 +15,7 @@ class QuestionBank(val mQuestionList: List<Question>) {
 
     init {
         // Shuffle the question list
-        Collections.shuffle(mQuestionList)
+        mQuestionList.shuffled()
 
         mNextQuestionIndex = 0
     }

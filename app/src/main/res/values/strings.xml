@@ -1,3 +1,13 @@
 <resources>
+    <!-- Global values -->
     <string name="app_name">Top Quiz</string>
+
+    <!-- Main Activity -->
+    <string name="greeting_txt">Bienvenue dans TopQuiz. Quel est votre prénom ?</string>
+    <string name="name_input">Veuillez taper votre nom</string>
+    <string name="rank_btn">Voir le classement</string>
+    <string name="play_btn">Jouer</string>
+
+    <!-- Rank Activity -->
+    <string name="rank_txt">Classement</string>
 </resources>

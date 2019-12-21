@@ -16,7 +16,7 @@ class RankActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rank)
 
-        // retour à l'activité précédente dans la barre de navigation
+        // Back to previous activity
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
@@ -25,12 +25,12 @@ class RankActivity : AppCompatActivity() {
         val rankJson: String? = preferences.getString(MainActivity.PREF_KEY_RANK, "")
         var rankList: List<User> = ArrayList()
 
-        // Lecture du Json
+        // Read the Json
         if (rankJson!=null && rankJson.isNotEmpty()){
             rankList = json.parse(User.serializer().list, rankJson)
         }
 
-        // Ajout de la liste à la vue
+        // Add the rankList to the activity
         val arrayAdapter = ListAdapter(this, rankList)
         rank_list.adapter = arrayAdapter
     }

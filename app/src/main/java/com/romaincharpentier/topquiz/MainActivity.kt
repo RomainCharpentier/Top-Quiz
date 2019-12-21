@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (GAME_ACTIVITY_REQUEST_CODE == requestCode && Activity.RESULT_OK == resultCode) {
-            // On récupère le score venant de la GameActivity
+            // Get the score from GameActivity
             val score: Int = data!!.getIntExtra(GameActivity.BUNDLE_EXTRA_SCORE, 0)
 
             mPreferences!!.edit().putInt(PREF_KEY_SCORE, score).apply()
@@ -101,12 +101,12 @@ class MainActivity : AppCompatActivity() {
         val rankJson: String? = preferences.getString(PREF_KEY_RANK, "")
         var rankList: MutableList<User> = ArrayList()
 
-        // Lecture du Json
+        // Read the Json
         if (rankJson!=null && rankJson.isNotEmpty()){
             rankList = json.parse(User.serializer().list, rankJson).toMutableList()
         }
 
-        // Ajout de l'utilisateur et tri
+        // Add the new User and sort by score
         rankList.add(mUser)
         rankList.sortDescending()
 
