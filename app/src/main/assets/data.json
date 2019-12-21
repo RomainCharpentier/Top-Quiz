@@ -1,0 +1,47 @@
+[
+  {
+    "question": "Qui est le président actuel de la France ?",
+    "choiceList": [ "François Hollande", "Emmanuel Macron", "Jacques Chirac", "François Mitterand" ],
+    "answerIndex": 1
+  },
+  {
+    "question": "Combien de pays composent l'Union Européenne ?",
+    "choiceList": [ "15", "24", "28", "32" ],
+    "answerIndex": 2
+  },
+  {
+    "question": "Qui est le créateur d'Android ?",
+    "choiceList": [ "Andy Rubin", "Steve Wozniak", "Jake Wharton", "Paul Smith" ],
+    "answerIndex": 0
+  },
+  {
+    "question": "En quelle année le premier homme a marché sur la Lune ?",
+    "choiceList": [ "1958", "1962", "1967", "1969" ],
+    "answerIndex": 3
+  },
+  {
+    "question": "Quelle est la capitale de la Roumanie ?",
+    "choiceList": [ "Bucarest", "Warsaw", "Budapest", "Berlin"],
+    "answerIndex": 0
+  },
+  {
+    "question": "Qui a peint Mona Lisa ?",
+    "choiceList": [ "Michelangelo", "Leonardo Da Vinci", "Raphael", "Carravagio" ],
+    "answerIndex": 1
+  },
+  {
+    "question": "Dans quelle ville est enterré le compositeur Frédéric Chopin ?",
+    "choiceList": [ "Strasbourg", "Warsaw", "Paris", "Moscow" ],
+    "answerIndex": 2
+  },
+  {
+    "question": "Quel est le domaine de premier niveau national de la Belgique ?",
+    "choiceList": [ ".bg", ".bm", ".bl", ".be" ],
+    "answerIndex": 3
+  },
+  {
+    "question": "Quel est le numéro de maison des Simpsons ?",
+    "choiceList": [ "42", "101", "666", "742" ],
+    "answerIndex": 3
+  }
+]
