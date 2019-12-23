@@ -6,6 +6,11 @@
     android:orientation="vertical"
     tools:context="com.romaincharpentier.topquiz.GameActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_animal_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/question_txt"
         android:layout_width="match_parent"

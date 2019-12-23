@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,6 @@ import com.romaincharpentier.topquiz.model.User
 import java.lang.Exception
 import kotlin.math.roundToInt
 
-
 class ListAdapter(context: Context, items: List<User>) :
     ArrayAdapter<User>(context, R.layout.itemlist_rank, items) {
 
@@ -24,8 +24,7 @@ class ListAdapter(context: Context, items: List<User>) :
         val rowView: View = inflater.inflate(R.layout.itemlist_rank, parent, false)
         val user: User? = getItem(position)
 
-        val idView: TextView = rowView.findViewById(R.id.id)
-        val imageView: ImageView = rowView.findViewById(R.id.image)
+        val idView: LinearLayout = rowView.findViewById(R.id.id)
         val nameView: TextView = rowView.findViewById(R.id.name)
         val scoreView: TextView = rowView.findViewById(R.id.score)
 
@@ -33,26 +32,27 @@ class ListAdapter(context: Context, items: List<User>) :
         scoreView.text = user.score.toString()
 
         if (position in 0..2) {
+            val imageView = ImageView(context)
+            imageView.adjustViewBounds = true
+            imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             when (position) {
                 0 -> {
                     imageView.setBackgroundResource(R.drawable.trophy_gold)
-//                    idView.setTextColor(Color.rgb(218,165,32))
                 }
                 1 -> {
                     imageView.setBackgroundResource(R.drawable.trophy_silver)
-//                    idView.setTextColor(Color.rgb(192,192,192))
                 }
                 2 -> {
                     imageView.setBackgroundResource(R.drawable.trophy_bronze)
-//                    idView.setTextColor(Color.rgb(205,127,50))
                 }
             }
-            // Remove ranking, it is symbolized by trophies
-            (idView.parent as ViewGroup).removeView(idView)
+            scaleImage(imageView)
+            idView.addView(imageView)
         } else {
-            idView.text = Integer.valueOf(position + 1).toString()
-            // We remove the image, there is no need because the rank is too low
-            (imageView.parent as ViewGroup).removeView(imageView)
+            val textView = TextView(context)
+            textView.text = Integer.valueOf(position + 1).toString()
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 100.0f)
+            idView.addView(textView)
         }
         return rowView
     }

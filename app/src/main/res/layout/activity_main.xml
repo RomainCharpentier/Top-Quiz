@@ -46,6 +46,6 @@
             android:layout_gravity="center_horizontal"
             android:padding="30dp"
             android:layout_margin="10dp"
-            android:text="@string/rank_btn" />
+            android:text="@string/play_btn" />
     </LinearLayout>
 </LinearLayout>

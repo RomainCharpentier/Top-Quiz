@@ -1,45 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_width="fill_parent">
 
-    <LinearLayout android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="50dp">
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:contentDescription="trophy_img"/>
+    <TableRow>
+        <LinearLayout
+            android:id="@+id/id"
+            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:orientation="horizontal" />
 
         <TextView
-            android:id="@+id/id"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:text="00"
-            android:textStyle="bold"
-            android:typeface="monospace" />
+            android:id="@+id/name"
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:text="name" />
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginHorizontal="10dp"
-        android:gravity="center"
-        android:text="name" />
-
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginHorizontal="10dp"
-        android:gravity="center"
-        android:text="score" />
+        <TextView
+            android:id="@+id/score"
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_column="2"
+            android:layout_weight="1"
+            android:text="score" />
+    </TableRow>
 
 </TableLayout>

@@ -8,6 +8,8 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.io.InputStream
 import kotlinx.serialization.ImplicitReflectionSerializer
@@ -29,6 +31,8 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mEnableTouchEvents: Boolean = true
 
+    private val resultAnswers = ArrayList<String>()
+
     val QUESTIONS_NUMBER = 5
 
     companion object {
@@ -42,6 +46,16 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+
+        val context = this
+        rv_animal_list.apply {
+            // Creates a vertical Layout Manager
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+            // Access the RecyclerView Adapter and load the data into it
+            adapter = ScoreListAdapter(resultAnswers, context)
+        }
+
 
         mQuestionBank = generateQuestions()
 
@@ -76,14 +90,20 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
             // Bonne réponse
             Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show()
             mScore++
+            resultAnswers.add("V")
         } else {
             // Mauvaise réponse
             Toast.makeText(this, "Mauvaise réponse !", Toast.LENGTH_SHORT).show()
+            resultAnswers.add("F")
         }
 
         mEnableTouchEvents = false
 
         Handler().postDelayed({
+            // actualize score list
+            rv_animal_list.apply {
+                adapter = ScoreListAdapter(resultAnswers, context)
+            }
             mEnableTouchEvents = true
 
             // S'il n'y a plus de questions, le jeu se termine, sinon on charge la question suivante
