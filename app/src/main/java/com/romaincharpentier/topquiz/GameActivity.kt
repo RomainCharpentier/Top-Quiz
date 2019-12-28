@@ -8,18 +8,19 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.romaincharpentier.topquiz.model.Question
+import com.romaincharpentier.topquiz.model.QuestionBank
+import com.romaincharpentier.topquiz.model.TypeScore
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.io.InputStream
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
-import kotlinx.serialization.*
-import com.romaincharpentier.topquiz.model.Question
-import com.romaincharpentier.topquiz.model.QuestionBank
+import kotlinx.serialization.list
 import java.lang.Integer.min
-import kotlin.collections.ArrayList
 
 class GameActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -31,15 +32,15 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mEnableTouchEvents: Boolean = true
 
-    private val resultAnswers = ArrayList<String>()
-
     val QUESTIONS_NUMBER = 5
+
+    private val resultAnswers = Array(QUESTIONS_NUMBER){TypeScore.EMPTY_ANSWER}
 
     companion object {
         // Variables statiques
-        val BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE"
-        val BUNDLE_STATE_SCORE = "currentScore"
-        val BUNDLE_STATE_QUESTION = "currentQuestion"
+        const val BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE"
+        const val BUNDLE_STATE_SCORE = "currentScore"
+        const val BUNDLE_STATE_QUESTION = "currentQuestion"
     }
 
     @ImplicitReflectionSerializer
@@ -48,14 +49,17 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_game)
 
         val context = this
-        rv_animal_list.apply {
+        score_list.apply {
             // Creates a vertical Layout Manager
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
             // Access the RecyclerView Adapter and load the data into it
             adapter = ScoreListAdapter(resultAnswers, context)
-        }
 
+            val itemDecorator = DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL)
+            itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider)!!)
+            addItemDecoration(itemDecorator)
+        }
 
         mQuestionBank = generateQuestions()
 
@@ -90,18 +94,18 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
             // Bonne réponse
             Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show()
             mScore++
-            resultAnswers.add("V")
+            resultAnswers[QUESTIONS_NUMBER - mNumberOfQuestions] = TypeScore.TRUE_ANSWER
         } else {
             // Mauvaise réponse
             Toast.makeText(this, "Mauvaise réponse !", Toast.LENGTH_SHORT).show()
-            resultAnswers.add("F")
+            resultAnswers[QUESTIONS_NUMBER - mNumberOfQuestions] = TypeScore.WRONG_ANSWER
         }
 
         mEnableTouchEvents = false
 
         Handler().postDelayed({
             // actualize score list
-            rv_animal_list.apply {
+            score_list.apply {
                 adapter = ScoreListAdapter(resultAnswers, context)
             }
             mEnableTouchEvents = true

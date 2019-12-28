@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     val GAME_ACTIVITY_REQUEST_CODE = 42
 
     companion object {
-        val PREF_KEY_RANK = "PREF_KEY_RANK"
+        const val PREF_KEY_RANK = "PREF_KEY_RANK"
     }
 
     val PREF_KEY_SCORE = "PREF_KEY_SCORE"
@@ -112,6 +112,6 @@ class MainActivity : AppCompatActivity() {
 
         // On garde uniquement les 10 premiers et on sauvegarde sous format Json
         val jsonResult = json.stringify(User.serializer().list, rankList.toList().subList(0, min(rankList.size, 10)))
-        preferences.edit().putString(PREF_KEY_RANK, jsonResult).commit()
+        preferences.edit().putString(PREF_KEY_RANK, jsonResult).apply()
     }
 }

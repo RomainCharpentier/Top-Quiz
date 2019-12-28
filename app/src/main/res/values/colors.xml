@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="emptyAnswer">#808080</color>
+    <color name="rightAnswer">#32a852</color>
+    <color name="wrongAnswer">#a83240</color>
+    <color name="outlineAnswer">#808080</color>
 </resources>
